@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Animal {
 
     Scanner teclado = new Scanner(System.in);
-     ArrayList< Expediente> listaExpediente = new ArrayList<>();
+     //ArrayList< Expediente> listaExpediente = new ArrayList<>();
      Cliente cliente;
 
     protected String nombre;
