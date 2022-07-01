@@ -1,14 +1,5 @@
 package models;
-import java.lang.reflect.AnnotatedArrayType;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Animal {
-
-    Scanner teclado = new Scanner(System.in);
-     //ArrayList< Expediente> listaExpediente = new ArrayList<>();
-     Cliente cliente;
-
     protected String nombre;
     protected int edad;
     protected String tipo;

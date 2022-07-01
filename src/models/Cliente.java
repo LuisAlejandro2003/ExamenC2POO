@@ -11,7 +11,7 @@ public class Cliente {
     ArrayList< Animal> listaAnimales = new ArrayList<>();
     ArrayList< Expediente> listaExpediente = new ArrayList<>();
     ArrayList< Producto> listaProductos = new ArrayList<>();
-    Animal animal;
+
 
   public  void crearObjetosProducto(){
       listaProductos.add(new Medicamento("Analgesico","Amantadina",150.0, "Si"));
@@ -34,7 +34,6 @@ public class Cliente {
     public void menuCliente(){
         int opcion;
         do{
-
                 System.out.println("Que tipo de animal es");
                 System.out.println("1.Terrestre");
                 System.out.println("2.Acuatico");
@@ -93,7 +92,6 @@ public class Cliente {
             }
             }
     }
-
     public void registrarMascotasA(){
         String nombre, tipo; int edad, cantidad=0;
         if (cantidad == 0) {
