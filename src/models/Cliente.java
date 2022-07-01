@@ -1,11 +1,15 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Cliente {
     private String nombre;
     private int telefono;
-    public Animal listaAnimales[];
+
+    ArrayList< Animal> listaAnimales = new ArrayList<>();
+    Animal animal;
+
     public Cliente(String nombre, int telefono) {
         this.nombre = nombre;
         this.telefono = telefono;
@@ -19,8 +23,10 @@ public class Cliente {
                 System.out.println("Que tipo de animal es");
                 System.out.println("1.Terrestre");
                 System.out.println("2.Actuatico");
+                System.out.println("3.Expediente");
+                System.out.println("4.Buscar por nombre");
                 opcion = teclado.nextInt();
-            }while(opcion < 1 || opcion >3);
+            }while(opcion < 1 || opcion >5);
             switch (opcion) {
                 case 1:
                     registrarMascotasT();
@@ -28,24 +34,28 @@ public class Cliente {
                 case 2:
                     registrarMascotasA();
                     break;
-                case 3:
-                    System.out.println("Que le vaya bien...");
+                case 3: generarExpediente();
+                    System.out.println("Generado con exito");
+                    break;
+                case 4: buscarAnimalpornombre();
+
                     break;
                 default:
                     System.out.println("Esa opcion no esta disponible");
                     break;
             }
         }while(opcion !=3);
-
     }
         public void registrarMascotasT() {
-            String nombreAT, tipoT; int edadT; int cantidad=0;
+            String nombreAT, tipoT;
+            int edadT;
+            int cantidad=0;
             if (cantidad == 0) {
                 do {
                     System.out.println("Ingrese la cantidad de mascotas a registrar");
                     cantidad = teclado.nextInt();
                 } while (cantidad <= 0 || cantidad > 5);
-            listaAnimales = new Terrestre[cantidad];
+
             for (int i = 0; i <cantidad; i++) {
                 System.out.println("Cual es el nombre del animal? ");
                 nombreAT=teclado.next();
@@ -53,9 +63,7 @@ public class Cliente {
                 edadT=teclado.nextInt();
                 System.out.println("Tipo: ");
                 tipoT=teclado.next();
-                Terrestre terrestre= new Terrestre(nombreAT,edadT,tipoT);
-                listaAnimales[i]=terrestre;
-
+                listaAnimales.add(new Terrestre(nombreAT,edadT,tipoT));
             }
              /*   for (int i =0; i<listaAnimales.length; i++) {
                     System.out.println("Mascota: " + listaAnimales[i].getNombre());
@@ -72,7 +80,6 @@ public class Cliente {
                 System.out.println("Ingrese la cantidad de mascotas a registrar");
                 cantidad = teclado.nextInt();
             } while (cantidad <= 0 || cantidad > 5);
-
             for (int i = 0; i < cantidad; i++) {
                 System.out.println("Cual es el nombre del animal? ");
                 nombre = teclado.next();
@@ -80,17 +87,42 @@ public class Cliente {
                 edad = teclado.nextInt();
                 System.out.println("Tipo: ");
                 tipo = teclado.next();
-                Acuatico acuatico = new Acuatico(nombre, edad, tipo);
-                listaAnimales[i] = acuatico;
+
+                listaAnimales.add(new Acuatico(nombre, edad, tipo));
+            }
+        }
+    }
+    public void generarExpediente(){
+        String nombreAnimalExpediente , motivo ;
+        int vacunas , peso;
+        System.out.println("Escriba el nombre del animal del cual va a crear el expediente");
+        nombreAnimalExpediente=teclado.next();
+        for (Animal animal : listaAnimales ){
+            if (animal.getNombre().equals(nombreAnimalExpediente)){
+                System.out.println("Escriba el motivo de la visita");
+                motivo=teclado.next();
+                System.out.println("Escriba la cantidad de vacunas que tiene el animal: ");
+                vacunas=teclado.nextInt();
+                System.out.println("Escriba peso del animal: ");
+                peso=teclado.nextInt();
+                System.out.println("Nombre del animal: ");
+                animal.listaExpediente.add(new Expediente(animal.getNombre(),animal.getEdad(),animal.getTipo(),vacunas,peso,motivo));
             }
         }
     }
 
-    public String getNombre() {
-        return nombre;
+    public void buscarAnimalpornombre(){
+        String nombreBUSCAR;
+        System.out.println("Escriba el nombre del animal del cual va a crear el expediente");
+        nombreBUSCAR=teclado.next();
+        for (Animal animal : listaAnimales ){
+            if (animal.getNombre().equals(nombreBUSCAR)){
+                System.out.println("Nombre: " + animal.getNombre());
+                System.out.println("Edad: " + animal.getEdad());
+                System.out.println("Edad: " + animal.getTipo());
+            }
+        }
     }
 
-    public int getTelefono() {
-        return telefono;
-    }
+
 }
