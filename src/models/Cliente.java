@@ -23,15 +23,13 @@ public class Cliente {
 
   }
 
-
-
     public Cliente(String nombre, int telefono) {
         this.nombre = nombre;
         this.telefono = telefono;
     }
     Scanner teclado = new Scanner(System.in);
 
-    public void menuCliente(){
+    public void menuCliente(ArrayList<Cliente>listaCliente){
         int opcion;
         do{
                 System.out.println("Que tipo de animal es");
@@ -57,7 +55,8 @@ public class Cliente {
                 case 4: buscarAnimalpornombre();
 
                     break;
-                case 5: imprimirExpediente();
+                case 5: imprimirExpediente(listaCliente);
+
                     break;
                 case 6:
                     crearObjetosProducto();
@@ -117,21 +116,34 @@ public class Cliente {
         nombreAnimalExpediente=teclado.next();
         for (Animal animal : listaAnimales ){
             if (animal.getNombre().equals(nombreAnimalExpediente)){
-                System.out.println("\n");
+                System.out.println();
                 System.out.println("Escriba el motivo de la visita");
                 motivo=teclado.next();
                 System.out.println("Escriba la cantidad de vacunas que tiene el animal: ");
                 vacunas=teclado.nextInt();
                 System.out.println("Escriba peso del animal: ");
-                System.out.println("\n");
+                System.out.println();
                 peso=teclado.nextInt();
                 listaExpediente.add(new Expediente(animal.getNombre(),animal.getEdad(),animal.getTipo(),vacunas,peso,motivo));
 
             }
         }
     }
-    public void imprimirExpediente(){
-        String nombreBuscar;
+    public void imprimirExpediente(ArrayList<Cliente>listaCliente){
+          String nombreBuscarCliente;
+       // System.out.println("Escriba el nombre del cliente a buscar: ");
+       // nombreBuscarCliente=teclado.next();
+       IMPRIMIRCLIENTE: for (Cliente cliente : listaCliente){
+           // if (cliente.getNombre().equals(nombreBuscarCliente)){
+                System.out.println("");
+                System.out.println("Datos del dueño");
+                System.out.println("Nombre: "+ cliente.getNombre());
+                System.out.println("Telefono: "+ cliente.getTelefono());
+                System.out.println("");
+           // }
+        }
+
+       String nombreBuscar;
         System.out.println("Escriba el nombre del animal para ver su expediente");
         nombreBuscar=teclado.next();
         IMPRIMIR: for (Expediente expediente : listaExpediente){
@@ -146,6 +158,8 @@ public class Cliente {
                 System.out.println("");
             }
         }
+
+
     }
 
     public void buscarAnimalpornombre(){
@@ -154,11 +168,11 @@ public class Cliente {
         nombreBUSCAR=teclado.next();
         BUSCARNOMBRE: for (Animal animal : listaAnimales ){
             if (animal.getNombre().equals(nombreBUSCAR)){
-                System.out.println("\n");
+                System.out.println();
                 System.out.println("Nombre: " + animal.getNombre());
                 System.out.println("Edad: " + animal.getEdad());
                 System.out.println("Tipo: " + animal.getTipo());
-                System.out.println("\n");
+                System.out.println();
             }
         }
     }
@@ -193,5 +207,13 @@ public class Cliente {
        System.out.println("El total vendido es: "+ total);
        System.out.println("");
    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
 }
 
